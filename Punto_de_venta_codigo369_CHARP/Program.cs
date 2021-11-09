@@ -16,7 +16,7 @@ namespace Punto_de_venta_codigo369_CHARP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new usuariosok());
         }
     }
 }
