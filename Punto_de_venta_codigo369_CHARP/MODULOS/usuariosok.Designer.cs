@@ -40,8 +40,10 @@ namespace Punto_de_venta_codigo369_CHARP
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataListado = new System.Windows.Forms.DataGridView();
+            this.Eli = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lblId_Usuario = new System.Windows.Forms.Label();
             this.lblnumeroIcono = new System.Windows.Forms.Label();
             this.PanelIcono = new System.Windows.Forms.Panel();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
@@ -70,7 +72,7 @@ namespace Punto_de_venta_codigo369_CHARP
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.btnGuardar2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGuardarCambios = new System.Windows.Forms.ToolStripMenuItem();
-            this.Eli = new System.Windows.Forms.DataGridViewImageColumn();
+            this.aviso_contraseña = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -197,17 +199,27 @@ namespace Punto_de_venta_codigo369_CHARP
             this.dataListado.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataListado.Location = new System.Drawing.Point(0, 95);
             this.dataListado.Name = "dataListado";
+            this.dataListado.RowHeadersVisible = false;
             this.dataListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataListado.Size = new System.Drawing.Size(636, 506);
             this.dataListado.TabIndex = 3;
+            this.dataListado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataListado_CellClick);
             this.dataListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataListado_CellContentClick);
+            this.dataListado.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataListado_CellContentDoubleClick);
+            // 
+            // Eli
+            // 
+            this.Eli.HeaderText = "";
+            this.Eli.Image = ((System.Drawing.Image)(resources.GetObject("Eli.Image")));
+            this.Eli.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Eli.Name = "Eli";
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel4.Location = new System.Drawing.Point(4, 101);
+            this.panel4.Location = new System.Drawing.Point(45, 140);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(681, 392);
             this.panel4.TabIndex = 4;
@@ -215,6 +227,8 @@ namespace Punto_de_venta_codigo369_CHARP
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.Controls.Add(this.aviso_contraseña);
+            this.panel5.Controls.Add(this.lblId_Usuario);
             this.panel5.Controls.Add(this.lblnumeroIcono);
             this.panel5.Controls.Add(this.PanelIcono);
             this.panel5.Controls.Add(this.lblAnuncioIcono);
@@ -235,10 +249,19 @@ namespace Punto_de_venta_codigo369_CHARP
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.menuStrip2);
-            this.panel5.Location = new System.Drawing.Point(3, 9);
+            this.panel5.Location = new System.Drawing.Point(3, 12);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(675, 380);
             this.panel5.TabIndex = 4;
+            // 
+            // lblId_Usuario
+            // 
+            this.lblId_Usuario.AutoSize = true;
+            this.lblId_Usuario.Location = new System.Drawing.Point(461, 56);
+            this.lblId_Usuario.Name = "lblId_Usuario";
+            this.lblId_Usuario.Size = new System.Drawing.Size(51, 20);
+            this.lblId_Usuario.TabIndex = 13;
+            this.lblId_Usuario.Text = "label7";
             // 
             // lblnumeroIcono
             // 
@@ -255,7 +278,7 @@ namespace Punto_de_venta_codigo369_CHARP
             this.PanelIcono.BackColor = System.Drawing.Color.DimGray;
             this.PanelIcono.Controls.Add(this.pictureBox7);
             this.PanelIcono.Controls.Add(this.flowLayoutPanel1);
-            this.PanelIcono.Location = new System.Drawing.Point(46, 39);
+            this.PanelIcono.Location = new System.Drawing.Point(195, 296);
             this.PanelIcono.Name = "PanelIcono";
             this.PanelIcono.Size = new System.Drawing.Size(691, 392);
             this.PanelIcono.TabIndex = 5;
@@ -332,7 +355,7 @@ namespace Punto_de_venta_codigo369_CHARP
             this.lblAnuncioIcono.BackColor = System.Drawing.Color.Gray;
             this.lblAnuncioIcono.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblAnuncioIcono.ForeColor = System.Drawing.Color.White;
-            this.lblAnuncioIcono.Location = new System.Drawing.Point(519, 15);
+            this.lblAnuncioIcono.Location = new System.Drawing.Point(519, 16);
             this.lblAnuncioIcono.Name = "lblAnuncioIcono";
             this.lblAnuncioIcono.Size = new System.Drawing.Size(138, 144);
             this.lblAnuncioIcono.TabIndex = 10;
@@ -365,12 +388,13 @@ namespace Punto_de_venta_codigo369_CHARP
             // 
             // txtRol
             // 
+            this.txtRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtRol.FormattingEnabled = true;
             this.txtRol.Items.AddRange(new object[] {
             "Solo ventas (no esta autorizado para manejar dinero)",
             "Cajero (Si esta autorizado para manejar dinero)",
             "Administrador (Control total)"});
-            this.txtRol.Location = new System.Drawing.Point(194, 174);
+            this.txtRol.Location = new System.Drawing.Point(193, 204);
             this.txtRol.Name = "txtRol";
             this.txtRol.Size = new System.Drawing.Size(310, 28);
             this.txtRol.TabIndex = 7;
@@ -442,7 +466,7 @@ namespace Punto_de_venta_codigo369_CHARP
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(144, 177);
+            this.label6.Location = new System.Drawing.Point(143, 207);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 20);
             this.label6.TabIndex = 4;
@@ -518,12 +542,16 @@ namespace Punto_de_venta_codigo369_CHARP
             this.btnGuardarCambios.Text = "Guardar Cambios";
             this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
             // 
-            // Eli
+            // aviso_contraseña
             // 
-            this.Eli.HeaderText = "";
-            this.Eli.Image = ((System.Drawing.Image)(resources.GetObject("Eli.Image")));
-            this.Eli.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Eli.Name = "Eli";
+            this.aviso_contraseña.AutoSize = true;
+            this.aviso_contraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aviso_contraseña.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.aviso_contraseña.Location = new System.Drawing.Point(224, 163);
+            this.aviso_contraseña.Name = "aviso_contraseña";
+            this.aviso_contraseña.Size = new System.Drawing.Size(182, 13);
+            this.aviso_contraseña.TabIndex = 14;
+            this.aviso_contraseña.Text = "Servirá para recuperar su contraseña";
             // 
             // usuariosok
             // 
@@ -610,6 +638,8 @@ namespace Punto_de_venta_codigo369_CHARP
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.Label lblnumeroIcono;
         private System.Windows.Forms.DataGridViewImageColumn Eli;
+        private System.Windows.Forms.Label lblId_Usuario;
+        private System.Windows.Forms.Label aviso_contraseña;
     }
 }
 
