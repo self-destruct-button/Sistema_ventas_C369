@@ -48,6 +48,7 @@
     <Reference Include="Telerik.ReportViewer.WinForms, Version=15.2.21.915, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CONEXION\ConexionMaestra.cs" />
     <Compile Include="MODULOS\usuariosok.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,5 +83,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
